@@ -5,13 +5,13 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ~/apps/mariadb:/var/lib/mysql
+      - ~/maria_db:/var/lib/mysql
       - ./resources/init/:/docker-entrypoint-initdb.d
     environment:
-      - MYSQL_ROOT_PASSWORD=S3cret
-      - MYSQL_PASSWORD=An0thrS3crt
-      - MYSQL_USER=citizix_user
-      - MYSQL_DATABASE=citizix_db
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_PASSWORD=password
+      - MYSQL_USER=cc_user
+      - MYSQL_DATABASE=community_cupboard
   backend:
     build:
       context: .
@@ -23,13 +23,6 @@ services:
     environment:
       - FLASK_ENV=dev
       - FLASK_DEBUG=1
-      - TASK_QUE_SERVER_REDIS=redis
       - SECRET_KEY=\x02"c\xc9\xf3\x82\xd8\xde\xaf\x9cB\xc6\xd3\x0f\x9a)u\x9a\x85\xb6\xf5\x8f\x80j
-      - DB_HOST=
-      - DB_USER=
-      - DB_PASSWORD=
-      - DB_DRIVER=mysql+mysqlconnector
-      - DB_PORT=3306
-      - DB_NAME=
     links:
       - mariadb
